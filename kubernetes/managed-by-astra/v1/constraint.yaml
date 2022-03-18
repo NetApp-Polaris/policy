@@ -1,0 +1,10 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAzureManagedByAstra
+metadata:
+  name: managed-by-astra
+spec:
+  match:
+    scope: Namespaced
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Service"]

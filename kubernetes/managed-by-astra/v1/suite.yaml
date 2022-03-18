@@ -1,0 +1,17 @@
+
+   
+kind: Suite
+apiVersion: test.gatekeeper.sh/v1alpha1
+tests:
+- name: managed-by-astra
+  template: template.yaml
+  constraint: constraint.yaml
+  cases:
+  - name: service-is-managed
+    object: samples/service-is-managed.yaml
+    assertions:
+    - violations: no
+  - name: service-is-not-managed
+    object: samples/service-is-not-managed.yaml
+    assertions:
+    - violations: yes

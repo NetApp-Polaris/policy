@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: controller.csi.trident.netapp.io
+    k8s_version: v1.18.3
+    trident_version: v21.01.1
+  name: trident-csi
+  namespace: trident
+  ownerReferences:
+  - apiVersion: trident.netapp.io/v1
+    controller: true
+    kind: TridentOrchestrator
+    name: trident
+spec:
+  ports:
+  - name: https
+    port: 34571
+    protocol: TCP
+    targetPort: 8443
+  - name: metrics
+    port: 9220
+    protocol: TCP
+    targetPort: 8001
+  selector:
+    app: controller.csi.trident.netapp.io
+  sessionAffinity: None
+  type: ClusterIP
