@@ -13,5 +13,10 @@ spec:
         package k8sazuremanagedbyastra
 
         violation[{"msg": msg}] {
-          msg := sprintf("REVIEW OBJECT: %v", [input.review])
+          ns := "netapp-monitoring"
+          names := [name | data.inventory.cluster.v1.Namespace[i].metadata.name == ns; name := data.inventory.cluster.v1.Namespace[i].metadata.name]
+
+          count(names) == 0
+
+          msg := "This cluster is not monitored by NetApp Astra. Number of netapp-monitoring namespaces: 0"
         }

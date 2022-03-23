@@ -3,8 +3,8 @@ kind: K8sAzureManagedByAstra
 metadata:
   name: managed-by-astra
 spec:
+  enforcementAction: warn
   match:
-    scope: Namespaced
     kinds:
       - apiGroups: [""]
-        kinds: ["Service"]
+        kinds: ["Node"]
